@@ -23,10 +23,9 @@ phases:
       - k3d create
       - sleep 30
       - export KUBECONFIG="$(k3d get-kubeconfig --name='k3s-default')"
-      - "TOKEN=$(aws ecr get-authorization-token --output text --query authorizationData[].authorizationToken | base64 -d | cut -d: -f2)"
-      - echo $TOKEN
+      - ./create_secret.sh
       - kubectl apply -f hello-k8s.yml
-      - sleep 30
+      - sleep 15
       - kubectl get po
   post_build:
     commands:
