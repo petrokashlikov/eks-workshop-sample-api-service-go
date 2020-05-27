@@ -19,6 +19,7 @@ phases:
   build:
     commands:
       - docker build --tag $REPOSITORY_URI:$TAG .
+      - docker push $REPOSITORY_URI:$TAG
       - k3d create
       - sleep 30
       - export KUBECONFIG="$(k3d get-kubeconfig --name='k3s-default')"
@@ -27,7 +28,6 @@ phases:
       - kubectl get po
   post_build:
     commands:
-      - docker push $REPOSITORY_URI:$TAG
       - CREDENTIALS=$(aws sts assume-role --role-arn $EKS_KUBECTL_ROLE_ARN --role-session-name codebuild-kubectl --duration-seconds 900)
       - export KUBECONFIG=$HOME/.kube/config
       - export AWS_ACCESS_KEY_ID="$(echo ${CREDENTIALS} | jq -r '.Credentials.AccessKeyId')"
