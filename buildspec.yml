@@ -5,6 +5,8 @@ phases:
     commands:
       - curl -sS -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-07-26/bin/linux/amd64/aws-iam-authenticator
       - curl -sS -o kubectl https://amazon-eks.s3-us-west-2.amazonaws.com/1.14.6/2019-08-22/bin/linux/amd64/kubectl
+      - curl -sS -0 k3d https://github.com/rancher/k3d/releases/download/v1.6.0/k3d-linux-amd64
+      - k3d --version
       - chmod +x ./kubectl ./aws-iam-authenticator
       - export PATH=$PWD/:$PATH
       - apt-get update && apt-get -y install jq python3-pip python3-dev && pip3 install --upgrade awscli
@@ -17,6 +19,7 @@ phases:
   build:
     commands:
       - docker build --tag $REPOSITORY_URI:$TAG .
+      -
 
   post_build:
     commands:
