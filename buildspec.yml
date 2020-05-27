@@ -5,7 +5,7 @@ phases:
     commands:
       - curl -sS -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-07-26/bin/linux/amd64/aws-iam-authenticator
       - curl -sS -o kubectl https://amazon-eks.s3-us-west-2.amazonaws.com/1.14.6/2019-08-22/bin/linux/amd64/kubectl
-      - wget https://github.com/rancher/k3d/releases/download/v1.6.0/k3d-linux-amd64
+      - wget -q https://github.com/rancher/k3d/releases/download/v1.6.0/k3d-linux-amd64
       - chmod +x ./kubectl ./aws-iam-authenticator ./k3d-linux-amd64
       - sudo mv k3d-linux-amd64 /usr/local/bin/k3d
       - k3d --version
