@@ -21,11 +21,11 @@ phases:
       - docker build --tag $REPOSITORY_URI:$TAG .
       - docker push $REPOSITORY_URI:$TAG
       - k3d create
-      - sleep 30
+      - sleep 20
       - export KUBECONFIG="$(k3d get-kubeconfig --name='k3s-default')"
       - ./create_secret.sh
       - kubectl apply -f hello-k8s.yml
-      - sleep 15
+      - sleep 20
       - ./unit_test.sh
   post_build:
     commands:
