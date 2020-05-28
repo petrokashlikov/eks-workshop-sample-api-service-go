@@ -26,7 +26,7 @@ phases:
       - ./create_secret.sh
       - kubectl apply -f hello-k8s.yml
       - sleep 15
-      - kubectl get po
+      - kubectl get services hello-k8s -o wide
   post_build:
     commands:
       - bash -c "if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"0/" ]; then exit 1; fi"
